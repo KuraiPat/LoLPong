@@ -1,5 +1,5 @@
 # More About This Project
-日本語は英語の後
+日本語は英語に続きます。
 
 These Arduino codes utilise the following hardware:
 
