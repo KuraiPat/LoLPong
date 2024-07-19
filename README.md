@@ -6,4 +6,4 @@ Input Shield v2 x2
 XBEE Cards x3
 XBEE Shield x1
 
-#This repository will NOT show how to initialize the XBEE cards.
+This repository will NOT show how to initialize the XBEE cards.
