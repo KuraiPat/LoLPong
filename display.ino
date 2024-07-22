@@ -4,6 +4,7 @@
 
 #define WIN_CONDITION 5
 
+//Objects
 class Ball {
 public:
   byte x, y;
@@ -47,10 +48,12 @@ public:
   }
 };
 
+// Initial States & defining
 Ball pong;
 Pad pad1(1), pad2(2);
 byte score1, score2;
-float speed;
+float d;
+int bounces, sl=50;
 
 void setup() {
   LedSign::Init(0);
@@ -122,7 +125,7 @@ void reset() {
   pong = Ball(random(6, 8), 4, vxi, vyi);
   pad1 = Pad(1);
   pad2 = Pad(2);
-  speed = 1;
+  bounces = 0;
 }
 
 void checkWinner() {
@@ -156,9 +159,11 @@ void loop() {
   
   if ((pong.x == pad1.x + 1 && abs(pong.y - pad1.y) <= 2) || (pong.x == pad2.x - 1 && abs(pong.y - pad2.y) <= 2)) {
     pong.vx *= -1;
-    speed += 0.1;
+    bounces +=1;
   }
+
+  d=pow(5.0,3.3-0.0465*bounces)+sl;
   
-  delay(250 / speed); // Consider using millis() for non-blocking timing
+  delay(d); // Consider using millis() for non-blocking timing
   pong.update();
 }

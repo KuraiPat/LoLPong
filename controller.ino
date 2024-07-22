@@ -4,7 +4,7 @@
 #define joysticky A2
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(230400);
   pinMode(down,0);
   pinMode(up,0);
   pinMode(initialize,0);
