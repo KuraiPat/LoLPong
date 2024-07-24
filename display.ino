@@ -54,6 +54,7 @@ Pad pad1(1), pad2(2);
 byte score1, score2;
 float d;
 int bounces, sl=50;
+volatile bool stopBanner = false;
 
 void setup() {
   LedSign::Init(0);
@@ -99,15 +100,11 @@ void start() {
       byte input = Serial.read();
       
       if (input == 4) {
-        break;
+        stopBanner = true;
       }
     }
   }
-  
-  while(Serial.available() > 0) {
-      Serial.read();
-  }
-
+  stopBanner = false;
   score1 = 0, score2 = 0;
 }
 
