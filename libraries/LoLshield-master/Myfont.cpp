@@ -179,17 +179,15 @@ void Myfont::Draw(int xval, unsigned char chr) /*draws an ascii char to the scre
 void Myfont::Banner(int len, unsigned char* text){
     int xoff=14;
     for(int i=0; i<len*5 +52; i++){
-        if (Serial.available() > 0) {
-            byte input = Serial.read();
-            if (input == 4) {
-                return; // Exit the function if input 4 is received
-            }
+        if (stopBanner) {
+            stopBanner = false; // Reset the flag
+            return; // Exit the function
         }
         for(int j=0; j<len; j++){
             Myfont::Draw(xoff + j*6, text[j]);
         }
         xoff--;
-        delay(50);
+        delay(70);
         LedSign::Clear();
     }
 }
