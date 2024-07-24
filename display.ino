@@ -1,7 +1,7 @@
 #include <Charliplexing.h>
 #include <Myfont.h>
 #include <TimerOne.h>
-
+#include <Globalvar.h>
 #define WIN_CONDITION 5
 
 //Objects
