@@ -16,6 +16,7 @@
 #include "Charliplexing.h"
 #include "Arduino.h"
 #include <inttypes.h>
+#include "Globalvar.h"
 
 const byte la[][5] PROGMEM = {
     /*all ascii codes:*/
