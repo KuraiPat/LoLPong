@@ -1,0 +1,1 @@
+Global-Variable Library is currently useless, though could be reused if needed to communicate between library and main code

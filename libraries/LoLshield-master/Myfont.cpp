@@ -16,6 +16,7 @@
 #include "Charliplexing.h"
 #include "Arduino.h"
 #include <inttypes.h>
+#include <Global.h>
 
 const byte la[][5] PROGMEM = {
     /*all ascii codes:*/
@@ -176,18 +177,20 @@ void Myfont::Draw(int xval, unsigned char chr) /*draws an ascii char to the scre
     }
 }
 
-void Myfont::Banner(int len, unsigned char* text){ /* text banner creator. use with example code!!*/
-    
-    
-    int xoff=14;/* setmx offset to the right end of the screen*/
-    for(int i=0; i<len*5 +52; i++){ /*scrolling loop*/
-        for(int j=0; j<len; j++){ /*loop over all of the chars in the text*/
-            Myfont::Draw(xoff + j*6, text[j]); /* call the draw font function*/
-        }
-        xoff--; /* decrement x offset*/
-        delay(70); /*scrolling speed increments if delay goes down*/
-        LedSign::Clear(); /*empty the screen */
-    }
-    
-    
+void Myfont::Banner(int len, unsigned char* text) {
+	int xoff = 14;
+	for (int i = 0; i < len * 5 + 52; i++) {
+		if (Serial.available() > 0) {
+			byte input = Serial.peek(); // Use peek() instead of read()
+			if (input == 4) {
+				return; // Exit the function if input 4 is detected
+			}
+		}
+		for (int j = 0; j < len; j++) {
+			Myfont::Draw(xoff + j * 6, text[j]);
+		}
+		xoff--;
+		delay(70);
+		LedSign::Clear();
+	}
 }

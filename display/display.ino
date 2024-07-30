@@ -1,7 +1,7 @@
 #include <Charliplexing.h>
 #include <Myfont.h>
 #include <TimerOne.h>
-
+#include <Global.h>
 #define WIN_CONDITION 5
 
 //Objects
@@ -54,6 +54,7 @@ Pad pad1(1), pad2(2);
 byte score1, score2;
 float d;
 int bounces, sl=50;
+volatile bool stopBanner = false;
 
 void setup() {
   LedSign::Init(0);
@@ -96,20 +97,18 @@ void start() {
 
   while (true) {
     if (Serial.available() > 0) {
-      byte input = Serial.read();
+      byte input = Serial.read(); // Use read() to consume the input
       
       if (input == 4) {
+        stopBanner = true;
         break;
       }
     }
   }
-  
-  while(Serial.available() > 0) {
-      Serial.read();
-  }
-
+  delay(1000);
   score1 = 0, score2 = 0;
 }
+
 
 void reset() {
   int8_t vxi, vyi;
@@ -166,4 +165,7 @@ void loop() {
   
   delay(d); // Consider using millis() for non-blocking timing
   pong.update();
+  if (stopBanner){
+    stopBanner = false;
+  }
 }
